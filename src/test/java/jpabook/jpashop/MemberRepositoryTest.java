@@ -19,7 +19,7 @@ class MemberRepositoryTest {
 
     @Test
     @Transactional
-//    @Rollback(false)
+    @Rollback(false) // 테스트 데이터를 저장하고 싶은 경우
     public void testMember() throws Exception {
         // given
         Member member = new Member();
