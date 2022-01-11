@@ -24,10 +24,10 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // CascadeType.ALL 옵션을 주었으므로 주문 저장이후 주문상품도 자동으로 저장 된다.
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -59,7 +59,7 @@ public class Order {
         order.setDelivery(delivery);
 
         for (OrderItem orderItem: orderItems) {
-            order.getOrderItems().add(orderItem);
+            order.addOrderItem(orderItem);
         }
 
         order.setStatus(OrderStatus.ORDER);
